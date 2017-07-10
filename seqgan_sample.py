@@ -27,9 +27,9 @@ class Generator():
     def build_network(self):
         model = Sequential()
         if lstm_num == 1:
-            model.add(LSTM(input_shape=(signal_len,1),units=cell_num,unit_forget_bias=True,return_sequences=False))
         else:
-            model.add(LSTM(input_shape=(signal_len,1),units=cell_num,unit_forget_bias=True,return_sequences=True))
+            model.add(LSTM(input_shape=(signal_len,1),units=cell_num,unit_forget_bias=True,return_sequences=False),stateful=True)
+            model.add(LSTM(input_shape=(signal_len,1),units=cell_num,unit_forget_bias=True,return_sequences=True),stateful=True)
             for i in range(lstm_num-1):
                 model.add(LSTM(units=cell_num,unit_forget_bias=True,return_sequences=True))
             model.add(LSTM(units=cell_num,unit_forget_bias=True,return_sequences=False))
